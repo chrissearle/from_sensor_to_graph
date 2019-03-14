@@ -90,8 +90,11 @@ For some users the script is not installing the InfluxDB node into Node-RED.
 
 Open the Node-RED interface, login and then choose `manage palatte > install`, search fornode-red-contrib-influxdb and install it.
 
-# Resources
+### MQTT
 
+TODO - set up user/password
+
+# Resources
 
 * Video: https://www.youtube.com/watch?v=JdV4x925au0
 * The script: https://tech.scargill.net/the-script/
