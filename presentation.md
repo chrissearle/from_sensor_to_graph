@@ -111,6 +111,17 @@ Node-RED pipelines - debug node
 
 ---
 
+## Influx DB for SQL people
+
+Influx has things that are _similar_ to SQL databases:
+
+measurement -- table
+tag -- indexed column
+field -- unindexed column
+point -- row
+
+--- 
+
 ### Demo
 
 InfluxDB data
