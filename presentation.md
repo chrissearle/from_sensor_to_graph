@@ -12,12 +12,33 @@
 
 ---
 
-## Arduino
+## ESP8266
 
 ![right](d1mini.jpg)
 
-- Arduino
-- ESP8266/ESP32
+- Wemos D1 mini
+- Inbuilt WiFi
+- 80MHz chip
+
+---
+
+## ESP32
+
+![right](d32.jpg)
+
+- D32
+- Inbuilt WiFi
+- Bluetooth
+- 160MHz chip
+- + lots more
+
+---
+
+## Raspberry PI
+
+![right](pi.jpg)
+
+- Rasbperry Pi 3B+
 
 ---
 
@@ -31,18 +52,19 @@
 
 ## Arduino coding
 
-Arduino is basically C++ with some extras
+Basically C++ with some extras
 
 ---
 
 ### DHT22
 
 ```c++
-// Add sensor on arduino pin D1
-DHT dht(D1, DHT22);
+dht DHT;
 
-float temperature = dht.readTemperature();
-float humidity = dht.readHumidity();
+DHT.read22(D1);
+
+float temperature = DHT.temperature;
+float humidity = DHT.humidity;
 ```
 
 ---
@@ -65,17 +87,13 @@ client.publish(MQTT_TOPIC, message);
 
 ## Demo
 
-Arduino Serial Console
+### Arduino Serial Console
+
+Let's take a quick look at what the arduino is saying
 
 ---
 
-## Node-RED
-
-TODO - Screenshot
-
-> Node-RED provides a browser-based flow editor that makes it easy to wire together flows using the wide range of nodes in the palette.[^1]
-
-[^1]: [https://nodered.org/](https://nodered.org/)
+![original](node-red.png)
 
 ---
 

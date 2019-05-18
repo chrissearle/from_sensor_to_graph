@@ -1,6 +1,7 @@
+
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-#include <DHT.h>
+#include <dht.h>
 
 #include <DNSServer.h>
 #include <ESP8266WebServer.h>
@@ -12,7 +13,7 @@ PubSubClient client(wifiClient);
 long lastMsg = 0;
 char msg[100];
 
-DHT dht(D1, DHT22);
+dht DHT;
 
 const char *MQTT_SERVER = "192.168.27.2";
 const char *MQTT_USER = "arduino";
@@ -32,10 +33,31 @@ void setup()
   client.setServer(MQTT_SERVER, 1883);
 }
 
+void read()
+{
+    int chk = DHT.read22(D1);
+
+    switch (chk)
+    {
+    case DHTLIB_OK:
+        Serial.print("OK,\t");
+        break;
+    case DHTLIB_ERROR_CHECKSUM:
+        Serial.print("Checksum error,\t");
+        break;
+    case DHTLIB_ERROR_TIMEOUT:
+        Serial.print("Time out error,\t");
+        break;
+    default:
+        Serial.print("Unknown error,\t");
+        break;
+    }
+}
+
 void send()
 {
   snprintf(msg, 100, "{ \"location\": \"DemoSensor\", \"temperature\": %f, \"humidity\": %f }",
-    dht.readTemperature(), dht.readHumidity());
+    DHT.temperature, DHT.humidity);
     
   Serial.print("Publish message: ");
   Serial.println(msg);
@@ -76,9 +98,10 @@ void loop()
 
   long now = millis();
 
-  if (now - lastMsg > (60 * 1000))
+  if (now - lastMsg > (10 * 1000))
   {
     lastMsg = now;
+    read();
     send();
   }
 }

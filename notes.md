@@ -65,6 +65,20 @@ When prompted - make sure that only the first Node/Node-RED choice is selected a
     bash script.sh
     sudo reboot
 
+### MQTT
+
+Set up the arduino user
+
+    sudo mosquitto_passwd  passwords arduino
+
+When prompted - set the password to arduino
+
+Do the same with user nodered password nodered
+
+Then restart mosquitto
+
+    sudo /etc/init.d/mosquitto restart
+
 ### InfluxDB
 
 First we need to enable the http endpoint.
@@ -84,15 +98,13 @@ Run `influx` then enter
 
     CREATE USER "pi" WITH PASSWORD 'raspberry' WITH ALL PRIVILEGES
 
+    CREATE DATABASE dht
+
 ### Node-RED
 
 For some users the script is not installing the InfluxDB node into Node-RED.
 
 Open the Node-RED interface, login and then choose `manage palatte > install`, search fornode-red-contrib-influxdb and install it.
-
-### MQTT
-
-TODO - set up user/password
 
 # Resources
 
